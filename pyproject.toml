@@ -16,6 +16,8 @@ classifiers = [
 ]
 dependencies = [
     "pyPS4Controller",
+    "gpiozero",
+    "rpi-gpio",
 ]
 dynamic = ["version"]
 
