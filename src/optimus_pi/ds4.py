@@ -1,12 +1,14 @@
 from pyPS4Controller.controller import Controller
 from gpiozero import Motor
 
+import .config as c
+
 class PS4Controller(Controller):
 
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
-        self.lmot = Motor(8, 7)
-        self.rmot = Motor(9, 10)
+        self.lmot = Motor(*c.LEFT_PINS)
+        self.rmot = Motor(*c.RIGHT_PINS)
 
     def on_L3_up(self, value):
         print(-value/2**16)
