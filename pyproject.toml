@@ -23,9 +23,10 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 test = ["pytest"]
+dev = ["pylint", "flake8", "ruff"]
 
-# [project.scripts]
-# my-script = "my_package.module:function"
+[project.scripts]
+# optimus_pi = "optimus_pi.__main__"
 
 # ... other project metadata fields as specified in:
 #     https://packaging.python.org/en/latest/specifications/declaring-project-metadata/

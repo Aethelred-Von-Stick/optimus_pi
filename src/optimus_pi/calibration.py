@@ -5,6 +5,7 @@ from pyPS4Controller.controller import Controller
 from .config import CONTROLLER_CALIBRATION_FILE
 
 class Calibration(Controller):
+    """Class for calibrating Dualshock4 joystick input."""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.max_joystick_values = {
@@ -14,22 +15,32 @@ class Calibration(Controller):
             "r3_down_max": 0,
         }
 
+    def start(self):
+        """Start listening for controller events."""
+        self.listen()
+
+    def end(self):
+        """Stop listening to controller events."""
+        self.stop = True
+
+    def save(self):
+        """Save the maximum joystick values to the calibration file."""
+        with CONTROLLER_CALIBRATION_FILE.open("w") as file_pointer:
+            json.dump(self.max_joystick_values, file_pointer)
+        self.end()
+
+    def _assign_high_input(self, joystick_key, value):
+        if abs(value) > abs(self.max_joystick_values[joystick_key]):
+            self.max_joystick_values[joystick_key] = value
+
     def on_L3_up(self, value):
-        if abs(value) > abs(max_joystick_values["l3_up_max"]):
-            self.max_joystick_values["l3_up_max"] = value
+        self._assign_high_input("l3_up_max", value)
 
     def on_L3_down(self, value):
-        if abs(value) > abs(max_joystick_values["l3_down_max"]):
-            self.max_joystick_values["l3_down_max"] = value
+        self._assign_high_input("l3_down_max", value)
 
     def on_R3_up(self, value):
-        if abs(value) > abs(max_joystick_values["r3_up_max"]):
-            self.max_joystick_values["r3_up_max"] = value
+        self._assign_high_input("r3_up_max", value)
 
     def on_R3_down(self, value):
-        if abs(value) > abs(max_joystick_values["r3_down_max"]):
-            self.max_joystick_values["r3_down_max"] = value
-
-    def stop(self):
-        with open(os.path.join(CONTROLLER_CALIBRATION_FILE), "w") as fp:
-            json.dump(self.max_joystick_values, fp)
+        self._assign_high_input("r3_down_max", value)

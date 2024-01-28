@@ -15,5 +15,5 @@ DEFAULT_CONTROLLER_CALIBRATION = {
     "r3_down_max": DEFAULT_MAX_CONTROLLER_VALUE,
 }
 
-CACHE_DIR = Path(__file__).parent() / ".cache"
+CACHE_DIR = Path(__file__).parent / ".cache"
 CONTROLLER_CALIBRATION_FILE = CACHE_DIR / "max_controller_values.json"
