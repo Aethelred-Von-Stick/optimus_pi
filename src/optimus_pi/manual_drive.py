@@ -18,7 +18,8 @@ from .config import (
 class ManualDrive(Controller):
     """Control the robot using the left and right joysticks on a Dualshock4 controller."""
     def __init__(self, **kwargs):
-        super().__init__(self, **kwargs)
+        print(kwargs)
+        super().__init__(**kwargs)
         self.lmot = Motor(*LEFT_PINS)
         self.rmot = Motor(*RIGHT_PINS)
 

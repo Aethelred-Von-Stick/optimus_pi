@@ -9,10 +9,11 @@ from .calibration import Calibration
 class ModeSelect(Controller):
     """Select the mode to enter using a Dualshock4 controller."""
     def __init__(self, **kwargs):
+        print(kwargs)
         super().__init__(**kwargs)
         self.modes = {
-            "manual_drive": ManualDrive(interface=self.interface),
-            "calibration": Calibration(interface=self.interface),
+            "manual_drive": ManualDrive(**kwargs),
+            "calibration": Calibration(**kwargs),
         }
 
     def stop_or_start_mode(self, mode):

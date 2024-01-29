@@ -44,3 +44,4 @@ class Calibration(Controller):
 
     def on_R3_down(self, value):
         self._assign_high_input("r3_down_max", value)
+
