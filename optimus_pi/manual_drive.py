@@ -4,7 +4,6 @@
 
 import json
 
-from pyPS4Controller.controller import Controller
 from gpiozero import Motor
 
 from .config import (
@@ -15,11 +14,9 @@ from .config import (
 )
 
 
-class ManualDrive(Controller):
+class ManualDrive:
     """Control the robot using the left and right joysticks on a Dualshock4 controller."""
-    def __init__(self, **kwargs):
-        print(kwargs)
-        super().__init__(**kwargs)
+    def __init__(self):
         self.lmot = Motor(*LEFT_PINS)
         self.rmot = Motor(*RIGHT_PINS)
 
@@ -29,14 +26,6 @@ class ManualDrive(Controller):
             )
         else:
             self.max_joystick_values = DEFAULT_CONTROLLER_CALIBRATION
-
-    def start(self):
-        """Start listening to controller events."""
-        self.listen()
-
-    def end(self):
-        """Set the stop attribute to stop listening."""
-        self.stop = True
 
     def on_L3_up(self, value):
         self.lmot.forward(value / self.max_joystick_values["l3_up_max"])
@@ -55,8 +44,3 @@ class ManualDrive(Controller):
 
     def on_R3_y_at_rest(self):
         self.rmot.stop()
-
-
-if __name__ == "__main__":
-    controller = ManualDrive(interface="/dev/input/js0", connecting_using_ds4drv=False)
-    controller.listen()

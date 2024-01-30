@@ -33,3 +33,6 @@ dev = ["pylint", "flake8", "ruff"]
 
 [tool.setuptools.dynamic]
 version = {file = "VERSION"}
+
+[tool.isort]
+known_first_party = ["optimus_pi"]

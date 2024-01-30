@@ -4,10 +4,9 @@ import json
 from pyPS4Controller.controller import Controller
 from .config import CONTROLLER_CALIBRATION_FILE
 
-class Calibration(Controller):
+class Calibration:
     """Class for calibrating Dualshock4 joystick input."""
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self):
         self.max_joystick_values = {
             "l3_up_max": 0,
             "l3_down_max": 0,
@@ -15,19 +14,10 @@ class Calibration(Controller):
             "r3_down_max": 0,
         }
 
-    def start(self):
-        """Start listening for controller events."""
-        self.listen()
-
-    def end(self):
-        """Stop listening to controller events."""
-        self.stop = True
-
-    def save(self):
+    def on_x_press(self):
         """Save the maximum joystick values to the calibration file."""
         with CONTROLLER_CALIBRATION_FILE.open("w") as file_pointer:
             json.dump(self.max_joystick_values, file_pointer)
-        self.end()
 
     def _assign_high_input(self, joystick_key, value):
         if abs(value) > abs(self.max_joystick_values[joystick_key]):
