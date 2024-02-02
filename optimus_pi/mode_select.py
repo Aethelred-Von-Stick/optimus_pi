@@ -30,6 +30,6 @@ class ModeSelect:
 
     def __getattr__(self, name):
         try:
-            getattr(self.mode, name)
+            return getattr(self.mode, name)
         except AttributeError:
-            getattr(self.controller, name)
+            return getattr(self.controller, name)

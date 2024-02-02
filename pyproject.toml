@@ -16,6 +16,7 @@ classifiers = [
 ]
 dependencies = [
     "pyPS4Controller",
+    "PyYAML",
     "gpiozero",
     "rpi-gpio",
 ]
@@ -26,13 +27,13 @@ test = ["pytest"]
 dev = ["pylint", "flake8", "ruff"]
 
 [project.scripts]
-# optimus_pi = "optimus_pi.__main__"
-
-# ... other project metadata fields as specified in:
-#     https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
+optimus_pi = "optimus_pi.__main__"
 
 [tool.setuptools.dynamic]
 version = {file = "VERSION"}
 
 [tool.isort]
 known_first_party = ["optimus_pi"]
+
+[tool.pylint]
+good-names-rgxs = ["on_.*"]

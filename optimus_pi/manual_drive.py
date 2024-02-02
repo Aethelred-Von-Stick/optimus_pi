@@ -2,30 +2,18 @@
 
 """Control the robot from user input."""
 
-import json
+import yaml
 
 from gpiozero import Motor
-
-from .config import (
-    LEFT_PINS,
-    RIGHT_PINS,
-    DEFAULT_CONTROLLER_CALIBRATION,
-    CONTROLLER_CALIBRATION_FILE,
-)
-
 
 class ManualDrive:
     """Control the robot using the left and right joysticks on a Dualshock4 controller."""
     def __init__(self):
-        self.lmot = Motor(*LEFT_PINS)
-        self.rmot = Motor(*RIGHT_PINS)
-
-        if CONTROLLER_CALIBRATION_FILE.exists():
-            self.max_joystick_values = json.loads(
-                CONTROLLER_CALIBRATION_FILE.read_text()
-            )
-        else:
-            self.max_joystick_values = DEFAULT_CONTROLLER_CALIBRATION
+        with open("config.yml", encoding="utf-8") as file_pointer:
+            config = yaml.load(file_pointer, Loader=yaml.Loader)
+        self.lmot = Motor(config["left_pins"]["pos"], config["left_pins"]["neg"])
+        self.rmot = Motor(config["right_pins"]["pos"], config["left_pins"]["neg"])
+        self.max_joystick_values = config["max_joystick_values"]
 
     def on_L3_up(self, value):
         self.lmot.forward(value / self.max_joystick_values["l3_up_max"])
