@@ -4,10 +4,13 @@
 
 import yaml
 
+from .constants import DEFAULT_CONFIG_FILE
+
+
 class Calibration:
     """Class for calibrating Dualshock4 joystick input."""
-    def __init__(self):
-        self.config_file = "config.yml"
+    def __init__(self, config_file=DEFAULT_CONFIG_FILE):
+        self.config_file = config_file
         with open(self.config_file, encoding="utf-8") as file_pointer:
             self.config = yaml.load(file_pointer, Loader=yaml.Loader)
         self.config["max_joystick_values"] = {
