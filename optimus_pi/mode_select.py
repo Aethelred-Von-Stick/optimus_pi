@@ -4,6 +4,7 @@
 
 from .calibration import Calibration
 from .manual_drive import ManualDrive
+import optimus_pi.constants as c
 
 
 class ModeSelect:
@@ -11,7 +12,6 @@ class ModeSelect:
 
     def __init__(self, controller, manual_drive, calibration):
         self.mode = None
-        self.controller = controller
         self.manual_drive = manual_drive
         self.calibration = calibration
 
@@ -29,8 +29,11 @@ class ModeSelect:
         else:
             self.mode = self.calibration
 
-    def __getattr__(self, name):
-        try:
-            return getattr(self.mode, name)
-        except AttributeError:
-            return getattr(self.controller, name)
+    def handle_event(self, event):
+        if event.name == c.SQUARE_PRESS:
+            self.on_square_press()
+        elif event.name == c.SHARE_PRESS:
+            self.on_share_press()
+        elif self.mode is not None:
+            self.mode.handle_event(event)
+

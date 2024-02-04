@@ -1,11 +1,11 @@
 left_pins:
-  - pos: 8
-  - neg: 7
+  - 8
+  - 7
 right_pins:
-  - pos: 9
-  - neg: 10
+  - 9
+  - 10
 max_joystick_values:
-  - l3_up_max: -0x10000,
-  - l3_down_max: 0x10000,
-  - r3_up_max: -0x10000,
-  - r3_down_max: 0x10000,
+  l3_up_max: -0x10000,
+  l3_down_max: 0x10000,
+  r3_up_max: -0x10000,
+  r3_down_max: 0x10000,
