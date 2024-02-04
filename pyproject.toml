@@ -27,7 +27,7 @@ test = ["pytest"]
 dev = ["pylint", "flake8", "ruff"]
 
 [project.scripts]
-optimus_pi = "optimus_pi.__main__"
+optimus_pi = "optimus_pi.__main__:main"
 
 [tool.setuptools.dynamic]
 version = {file = "VERSION"}
