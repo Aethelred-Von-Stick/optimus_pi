@@ -29,13 +29,13 @@ jobs:
         pip install -e .[dev,test]
     - name: Lint with ruff
       run: |
-        ruff check
+        ruff check .
     - name: Lint with pylint
       run: |
         pylint $(git ls-files '*.py')
-    - name: Lint with black
+    - name: Check ruff autoformatting
       run: |
-        black --check .
+        ruff format --check .
     - name: Test with pytest
       run: |
         pytest
