@@ -39,4 +39,4 @@ known_first_party = ["optimus_pi"]
 good-names-rgxs = ["on_.*"]
 
 [tool.ruff.lint.per-file-ignores]
-"__init__.py" = ["E402"]  # Unused imports in __init__.py
+"__init__.py" = ["F401"]  # Unused imports in __init__.py
