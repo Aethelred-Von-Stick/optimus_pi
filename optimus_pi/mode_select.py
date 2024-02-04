@@ -8,6 +8,7 @@ from .manual_drive import ManualDrive
 
 class ModeSelect:
     """Select the mode to enter using a Dualshock4 controller."""
+
     def __init__(self, controller, manual_drive, calibration):
         self.mode = None
         self.controller = controller

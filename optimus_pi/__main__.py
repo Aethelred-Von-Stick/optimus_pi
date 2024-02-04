@@ -10,7 +10,9 @@ from optimus_pi import Calibration, ManualDrive, ModeSelect
 def main():
     """Main function to start the robot."""
     mode_select = ModeSelect(
-        controller=Controller(interface="/dev/input/js0", connecting_using_ds4drv=False),
+        controller=Controller(
+            interface="/dev/input/js0", connecting_using_ds4drv=False
+        ),
         calibration=Calibration(),
         manual_drive=ManualDrive(),
     )
