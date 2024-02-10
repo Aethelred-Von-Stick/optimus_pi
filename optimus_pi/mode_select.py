@@ -10,7 +10,7 @@ import optimus_pi.constants as c
 class ModeSelect:
     """Select the mode to enter using a Dualshock4 controller."""
 
-    def __init__(self, controller, manual_drive, calibration):
+    def __init__(self, manual_drive, calibration):
         self.mode = None
         self.manual_drive = manual_drive
         self.calibration = calibration
