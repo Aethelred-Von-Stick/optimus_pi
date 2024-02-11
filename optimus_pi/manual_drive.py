@@ -17,7 +17,6 @@ class ManualDrive:
         self.value = None
         with open(config_file, encoding="utf-8") as file_pointer:
             config = yaml.load(file_pointer, Loader=yaml.Loader)
-        print(config["left_pins"])
         self.lmot = Motor(*config["left_pins"])
         self.rmot = Motor(*config["right_pins"])
         self.max_joystick_values = config["max_joystick_values"]
