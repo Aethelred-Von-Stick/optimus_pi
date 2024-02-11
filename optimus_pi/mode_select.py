@@ -3,6 +3,7 @@
 """Use a Dualshock4 controller for seting global modes."""
 
 import optimus_pi.constants as c
+
 from .calibration import Calibration
 from .manual_drive import ManualDrive
 

@@ -1,8 +1,8 @@
 """Calls ``handle_event`` on downstream classes."""
 
+import types
 from dataclasses import dataclass
 from typing import Optional
-import types
 
 from pyPS4Controller.controller import Controller
 

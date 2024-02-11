@@ -2,12 +2,12 @@
 
 """Control the robot from user input."""
 
+import logging
+
 import yaml
 from gpiozero import Motor
 
 import optimus_pi.constants as c
-
-import logging
 
 
 class ManualDrive:

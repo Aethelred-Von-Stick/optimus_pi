@@ -5,8 +5,9 @@ import logging
 import optimus_pi.constants as c
 
 
-class Mode:  #pylint: disable=too-few-public-methods
+class Mode:  # pylint: disable=too-few-public-methods
     """Base mode class."""
+
     def __init__(self):
         self.event = None
 
@@ -21,4 +22,6 @@ class Mode:  #pylint: disable=too-few-public-methods
         try:
             getattr(self, c.EVENT_MAP[event.name])()
         except AttributeError:
-            logging.info("%s not handling %s event", self.__class__.__name__, event.name)
+            logging.info(
+                "%s not handling %s event", self.__class__.__name__, event.name
+            )

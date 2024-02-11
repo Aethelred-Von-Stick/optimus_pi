@@ -24,7 +24,9 @@ class Calibration(Mode):
         }
 
     def _assign_high_input(self, joystick_key):
-        if abs(self.event.value) > abs(self.config["max_joystick_values"][joystick_key]):
+        if abs(self.event.value) > abs(
+            self.config["max_joystick_values"][joystick_key]
+        ):
             self.config["max_joystick_values"][joystick_key] = self.event.value
 
     def on_x_press(self):

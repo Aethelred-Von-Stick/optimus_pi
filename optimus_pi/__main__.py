@@ -3,7 +3,7 @@
 """Start the robot by selecting a mode."""
 
 
-from optimus_pi import Calibration, ManualDrive, ModeSelect, EventHandler
+from optimus_pi import Calibration, EventHandler, ManualDrive, ModeSelect
 
 
 def main():

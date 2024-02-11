@@ -2,8 +2,8 @@
 
 """Tests for mode selection."""
 
-from optimus_pi import Calibration, ManualDrive, Event
 import optimus_pi.constants as c
+from optimus_pi import Calibration, Event, ManualDrive
 
 
 def test_on_square_press(mode_select):

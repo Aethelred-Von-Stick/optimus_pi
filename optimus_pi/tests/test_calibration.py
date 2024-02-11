@@ -3,6 +3,7 @@
 """Tests for calibration."""
 
 import yaml
+
 import optimus_pi.constants as c
 from optimus_pi.event_handler import Event
 
