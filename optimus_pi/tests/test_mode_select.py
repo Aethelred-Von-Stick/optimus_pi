@@ -2,32 +2,25 @@
 
 """Tests for mode selection."""
 
-from optimus_pi import Calibration, ManualDrive
+from optimus_pi import Calibration, ManualDrive, Event
+import optimus_pi.constants as c
 
 
-def test_on_square_press(mode_select, manual_drive):
-    """manual_drive mode should be on and it's attributes exposed."""
+def test_on_square_press(mode_select):
+    """manual_drive mode should be switched on."""
     assert mode_select.mode is None
-    mode_select.on_square_press()
+    mode_select.handle_event(Event(c.SQUARE_PRESS))
     assert isinstance(mode_select.mode, ManualDrive)
-    # Test that attributes from ManualDrive take presidence over Controller.
-    assert mode_select.on_R3_up == manual_drive.on_R3_up
-    # Test that we have inhereted attributes from Controller.
-    assert hasattr(mode_select, "listen")
     # Test that manual_drive mode is turned off.
-    mode_select.on_square_press()
+    mode_select.handle_event(Event(c.SQUARE_PRESS))
     assert mode_select.mode is None
 
 
-def test_on_share_press(mode_select, calibration):
-    """calibration mode should be on and it's attributes exposed."""
+def test_on_share_press(mode_select):
+    """calibration_mode should be switched on."""
     assert mode_select.mode is None
-    mode_select.on_share_press()
+    mode_select.handle_event(Event(c.SHARE_PRESS))
     assert isinstance(mode_select.mode, Calibration)
-    # Test that attributes from Calibration take presidence over Controller.
-    assert mode_select.on_R3_up == calibration.on_R3_up
-    # Test that we have inhereted attributes from Controller.
-    assert hasattr(mode_select, "listen")
     # Test that calibration mode is turned off.
-    mode_select.on_share_press()
+    mode_select.handle_event(Event(c.SHARE_PRESS))
     assert mode_select.mode is None
