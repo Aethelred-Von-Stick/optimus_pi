@@ -19,6 +19,8 @@ dependencies = [
     "PyYAML",
     "gpiozero",
     "rpi-gpio",
+    "numpy",
+    "opencv-contrib-python-headless",
 ]
 dynamic = ["version"]
 
