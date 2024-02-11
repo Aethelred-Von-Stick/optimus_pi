@@ -2,17 +2,17 @@
 
 """Module for calibration, editing the config.yml file."""
 
-import logging
 import yaml
 
 import optimus_pi.constants as c
+from optimus_pi.mode import Mode
 
 
-class Calibration:
+class Calibration(Mode):
     """Class for calibrating Dualshock4 joystick input."""
 
     def __init__(self, config_file=c.DEFAULT_CONFIG_FILE):
-        self.value = None
+        super().__init__()
         self.config_file = config_file
         with open(self.config_file, encoding="utf-8") as file_pointer:
             self.config = yaml.load(file_pointer, Loader=yaml.Loader)
@@ -24,16 +24,8 @@ class Calibration:
         }
 
     def _assign_high_input(self, joystick_key):
-        if abs(self.value) > abs(self.config["max_joystick_values"][joystick_key]):
-            self.config["max_joystick_values"][joystick_key] = self.value
-
-    def handle_event(self, event):
-        """Handle controller events."""
-        self.value = event.value
-        try:
-            getattr(self, c.EVENT_MAP[event.name])()
-        except AttributeError:
-            logging.info("ManualDrive not handling %s event", event.name)
+        if abs(self.event.value) > abs(self.config["max_joystick_values"][joystick_key]):
+            self.config["max_joystick_values"][joystick_key] = self.event.value
 
     def on_x_press(self):
         """Save the maximum joystick values to the calibration file."""

@@ -2,15 +2,24 @@
 
 """Use a Dualshock4 controller for seting global modes."""
 
+import optimus_pi.constants as c
 from .calibration import Calibration
 from .manual_drive import ManualDrive
-import optimus_pi.constants as c
 
 
 class ModeSelect:
     """Select the mode to enter using a Dualshock4 controller."""
 
     def __init__(self, manual_drive, calibration):
+        """Select the mode to enter using a Dualshock4 controller.
+
+        Args:
+            manual_drive (~optimus_pi.manual_drive.ManualDrive): A ManualDrive
+                instance.
+            calibration (~optimus_pi.calibration.Calibration): A Calibration
+                instance.
+
+        """
         self.mode = None
         self.manual_drive = manual_drive
         self.calibration = calibration
@@ -40,6 +49,7 @@ class ModeSelect:
             self.mode = self.calibration
 
     def handle_event(self, event):
+        """Handle controller events."""
         if event.name == c.SQUARE_PRESS:
             self.on_square_press()
         elif event.name == c.SHARE_PRESS:
