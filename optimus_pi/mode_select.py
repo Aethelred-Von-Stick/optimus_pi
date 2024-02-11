@@ -46,4 +46,3 @@ class ModeSelect:
             self.on_share_press()
         elif self.mode is not None:
             self.mode.handle_event(event)
-

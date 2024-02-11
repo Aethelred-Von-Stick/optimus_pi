@@ -57,4 +57,3 @@ class Calibration:
     def on_R3_down(self):
         """Update the config with the highest value from the controller."""
         self._assign_high_input("r3_down_max")
-

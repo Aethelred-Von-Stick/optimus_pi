@@ -6,7 +6,6 @@ from unittest import mock
 
 import pytest
 import yaml
-from pyPS4Controller.controller import Controller
 
 from optimus_pi.calibration import Calibration
 from optimus_pi.manual_drive import ManualDrive
@@ -41,6 +40,7 @@ def fixture_config_file(tmp_path, config_dict):
 def fixture_calibration(config_file):
     """Initialise a Calibration object."""
     return Calibration(config_file=config_file)
+
 
 @pytest.fixture(name="manual_drive")
 def fixture_manual_drive():

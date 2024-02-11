@@ -28,7 +28,7 @@ class ManualDrive:
             getattr(self, c.EVENT_MAP[event.name])()
         except AttributeError:
             logging.info("ManualDrive not handling %s event", event.name)
-            
+
     def on_L3_up(self):
         """Left motor forward."""
         self.lmot.forward(self.value / self.max_joystick_values["l3_up_max"])
