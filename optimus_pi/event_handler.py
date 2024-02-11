@@ -23,7 +23,7 @@ class EventHandler(Controller):
     def __getattribute__(self, name):
         if name in c.INVERSE_EVENT_MAP:
             def on_event(self, value=None):
-                event = Event(name, value)
+                event = Event(c.INVERSE_EVENT_MAP[name], value)
                 self.mode_select.handle_event(event)
-            return types.MethodType(self, on_event)
+            return types.MethodType(on_event, self)
         return super().__getattribute__(name)

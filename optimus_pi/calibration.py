@@ -2,6 +2,7 @@
 
 """Module for calibration, editing the config.yml file."""
 
+import logging
 import yaml
 
 import optimus_pi.constants as c
@@ -36,6 +37,8 @@ class Calibration:
 
     def on_x_press(self):
         """Save the maximum joystick values to the calibration file."""
+        print("Saving Configuration")
+        print(self.config)
         with open(self.config_file, "w", encoding="utf-8") as file_pointer:
             yaml.dump(self.config, file_pointer)
 
