@@ -5,13 +5,14 @@
 import optimus_pi.constants as c
 
 from .calibration import Calibration
+from .line_follower import LineFollower
 from .manual_drive import ManualDrive
 
 
 class ModeSelect:
     """Select the mode to enter using a Dualshock4 controller."""
 
-    def __init__(self, manual_drive, calibration):
+    def __init__(self, manual_drive, calibration, line_follower):
         """Select the mode to enter using a Dualshock4 controller.
 
         Args:
@@ -19,17 +20,21 @@ class ModeSelect:
                 instance.
             calibration (~optimus_pi.calibration.Calibration): A Calibration
                 instance.
+            line_follower (~optimus_pi.line_follower.LineFollower): A line
+                follower instance.
 
         """
         self.mode = None
         self.manual_drive = manual_drive
         self.calibration = calibration
-        print("===========================")
-        print("       Select Mode         ")
-        print("===========================")
-        print("[SQUARE] Manual Drive Mode.")
-        print("[SHARE] Calibration Mode.  ")
-        print("===========================")
+        self.line_follower = line_follower
+        print("==============================")
+        print("         Select Mode          ")
+        print("==============================")
+        print("[SQUARE] Manual Drive Mode.   ")
+        print("[SHARE] Calibration Mode.     ")
+        print("[TRIANGLE] Line Follower Mode.")
+        print("==============================")
 
     def on_square_press(self):
         """Enter or exit manual_drive mode."""
@@ -48,6 +53,17 @@ class ModeSelect:
         else:
             print("Entering Calibration Mode.")
             self.mode = self.calibration
+
+    def on_triangle_press(self):
+        """Enter or exit line following mode."""
+        if isinstance(self.mode, LineFollower):
+            print("Exiting Line Following Mode.")
+            self.mode.finish()
+            self.mode = None
+        else:
+            print("Entering Line Following Mode.")
+            self.mode = self.line_follower
+            self.mode.start()
 
     def handle_event(self, event):
         """Handle controller events."""

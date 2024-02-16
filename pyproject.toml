@@ -25,6 +25,7 @@ dependencies = [
 dynamic = ["version"]
 
 [project.optional-dependencies]
+pi = ["picamera"]
 test = ["pytest"]
 dev = ["pylint", "flake8", "ruff"]
 
@@ -39,6 +40,10 @@ known_first_party = ["optimus_pi"]
 
 [tool.pylint]
 good-names-rgxs = ["on_.*"]
+extension-pkg-allow-list = ["cv2"]
+
+[tool.pylint.typecheck]
+generated-members = ["cv2.*"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]  # Unused imports in __init__.py
